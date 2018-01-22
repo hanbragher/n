@@ -15,7 +15,7 @@
 <div class="container">
 	<div id="fullscreen_bg" class="fullscreen_bg"/>
 
-	<form class="form-signin" action="" method="POST">
+	<form class="form-signin" action="login" method="POST">
 		<h3 class="form-signin-heading">Բարի գալուստ</h3>
 		<input type="text" class="form-control" placeholder="էլ․ հասցե" required="" autofocus="" name="mail">
 		<input type="password" class="form-control" placeholder="Գաղտնաբառ" required="" name="passwrd">

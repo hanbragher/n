@@ -43,3 +43,9 @@ function newuser(){
                         trimstrip('regmail'));
     $user->grancelUser();
 };
+
+function mailuxarkel($reglogin, $regmail, $key){
+    $vernagir = 'Բարի գալուստ';
+    $text = "Էջը հաստատելու համար խնդրում են անցնել այս հղումով ".SITE."/actions/accountactivating.php/?user=$reglogin&key=$key";
+    mail($regmail, $vernagir, $text, 'From: boom@bdish.com');
+};
