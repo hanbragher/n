@@ -1,6 +1,6 @@
 <?php
 include ('functions.php');
-//
+
 
 $routing = include ('routing.php');
 $adress = ($_SERVER['REQUEST_URI']) ? $_SERVER['REQUEST_URI']:"/";
