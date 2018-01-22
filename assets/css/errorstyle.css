@@ -1,5 +1,5 @@
 div.background {
-    background: url(http://oswintechnologies.com/error/404.jpg) ;
+    /*background: url(http://oswintechnologies.com/error/404.jpg) ;*/
     border: 1px solid white;
     background-size: cover;
     background-repeat: no-repeat;
@@ -12,7 +12,7 @@ div.background {
 /* Below piece of code makes  the highlitened box*/
 div.err {
     margin: 100px;
-    background-color: #ffffff;/* Used for colouring the transition box*/
+    background-color: #e1e1e1;/* Used for colouring the transition box*/
     border: 1px solid white;
     opacity: 0.6;/*Used to specify opacity*/
     padding-top: 50px;

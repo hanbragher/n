@@ -23,7 +23,7 @@
 			Մուտք
 		</button>
 		<a href="reg"><h class="form-signin-heading">Գրանցվել / </h></a>
-		<a href="վերհիշել"><h class="form-signin-heading">Բա գաղնաբա՞ռը</h></a>
+		<a href="remember"><h class="form-signin-heading">Բա գաղնաբա՞ռը</h></a>
 	</form>
 
 </div>
