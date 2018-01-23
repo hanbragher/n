@@ -22,7 +22,7 @@ function stugelpass(){
             }elseif(stugeluser()){
                 newuser();
             };
-
+//
         }}};
 
 function stugeluser(){
