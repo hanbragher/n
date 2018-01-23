@@ -20,5 +20,3 @@
 </div>
 </body>
 </html>
-
-<?php echo check_login_header(); print_r($_SERVER);

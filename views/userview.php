@@ -1,4 +1,3 @@
 <?php
 echo "boom";
-stugellog();
-
+check_login_header();

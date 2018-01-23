@@ -78,9 +78,9 @@ function user_activation(){
 
 function check_login_header(){
     if (check_login()){
-        return "action=\"login\" method=\"POST\">";
+        return true;
     }else{
-        return "action=\"login\" method=\"POST\">";
+        return false;
     }
 };
 
@@ -96,7 +96,7 @@ function check_login(){
                 if($user1['alive'] == 1){
                     if($user1['stat'] == 1){
                         setcookie("mail", $mail);
-                        return true;
+                        return "ok";
                     }else{
                         echo "Օգտատիրոջ մուտքը հաստատված չէ";
                         return false;}
@@ -105,8 +105,7 @@ function check_login(){
                     return false;}
             }else{
                 echo "Սխալ տվյալներ";
-                return "login";}
-                //return false;}
+                return false;}
         }
     }
 };
