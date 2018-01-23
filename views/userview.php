@@ -1,3 +1,6 @@
 <?php
 echo "boom";
-check_login_header();
+if (check_login_header()){
+    include ("views/user_page.php");
+}else{
+    include ("views/login_form.php");};

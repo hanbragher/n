@@ -9,8 +9,8 @@ $routing =  [
     ],
 
     "/login" => [
-        'method'    => 'POST',
-        'view'      => ROOT."/views/login_form.php",
+        'method'    => 'GET',
+        'view'      => ROOT."/views/userview.php",
         'model'     => ''
     ],
 

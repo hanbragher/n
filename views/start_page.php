@@ -15,7 +15,7 @@
 <div class="container">
     <div id="fullscreen_bg" class="fullscreen_bg"/>
 
-    <form class="form-signin" action="login" method="POST">
+    <form class="form-signin" action="login" method="GET">
         <h3 class="form-signin-heading">Բարի գալուստ</h3>
         <button class="btn btn-lg btn-primary btn-block" type="submit">
             Մուտք

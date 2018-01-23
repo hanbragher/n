@@ -95,8 +95,9 @@ function check_login(){
             if (password_verify($passwrd, $user1['passwrd'])){
                 if($user1['alive'] == 1){
                     if($user1['stat'] == 1){
-                        setcookie("mail", $mail);
-                        return "ok";
+                        //setcookie("mail", $mail);
+                        include ("views/userview.php");
+                        return true;
                     }else{
                         echo "Օգտատիրոջ մուտքը հաստատված չէ";
                         return false;}
