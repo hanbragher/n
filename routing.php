@@ -10,13 +10,13 @@ $routing =  [
 
     "/login" => [
         'method'    => 'POST',
-        'view'      => ROOT."/views/userview.php",
+        'view'      => ROOT."/views/login_form.php",
         'model'     => ''
     ],
 
 
     "/reg" => [
-		'method'    => 'GET',
+		'method'    => 'POST',
 		'view'      => ROOT."/views/reg_form.php",
 		'model'     => ''
 	],
@@ -35,13 +35,13 @@ $routing =  [
 
 	"/error" => [
 		'method'    => 'GET',
-		'view'      => ROOT."/views/error_page.html",
+		'view'      => ROOT."/views/error_page.php",
 		'model'     => ''
 	],
 
 	"/" => [
 		'method'    => 'GET',
-		'view'      => ROOT."/views/login_form.php",
+		'view'      => ROOT."/views/start_page.php",
 		'model'     => ''
 	],
 ];

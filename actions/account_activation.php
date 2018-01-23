@@ -17,10 +17,8 @@
 
 	<form class="form-signin" action="login" method="POST">
 		<h3 class="form-signin-heading">Բարի գալուստ</h3>
-<?php
-include ('../functions.php');
-user_activation();?>
-        <a href="<?php echo SITE;?>"<h class="form-signin-heading">Վերադարձ</h></a>
+<?php include ('../functions.php'); user_activation();?>
+        <a href="<?php echo SITE;?>"><h class="form-signin-heading">Դեպի գլխավոր էջ -></h></a>
 	</form>
 
 </div>

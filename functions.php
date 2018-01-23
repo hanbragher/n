@@ -62,7 +62,7 @@ function user_activation(){
                 if($user['checks'] == $key){
                     $value1 = "UPDATE users SET stat=1 WHERE mail='".$mail."'";
                     if (mysqli_query(bazakpnel(), $value1)){
-                        echo "<a><h class=\"form-signin-heading\">Հաջողությամբ հաստատված է</h></a>";
+                        echo "<a><h5 class=\"form-signin-heading\">Հաջողությամբ հաստատված է</h5></a>";
                     }else{
                         echo "<a><h class=\"form-signin-heading\">Ակտիվացման սխալ". mysqli_error(bazakpnel())."</h></a>";}
                         //echo "Ակտիվացման սխալ ". mysqli_error(bazakpnel())."<br>";}
@@ -70,8 +70,42 @@ function user_activation(){
                     echo "<a><h class=\"form-signin-heading\">Սպառված կամ սխալ ակտիվացում</h></a>";}
                     //echo "Սպառված կամ սխալ ակտիվացում <a href=".SITE."><br>վերադառնալ կայք</a>";}
             }elseif($user['stat'] == 1){
-                    echo "<a><h class=\"form-signin-heading\">Արդեն հաստատված է </h></a>";}
+                    echo "<a><h5 class=\"form-signin-heading\">Արդեն հաստատված է </h5></a>";}
                     //echo "Արդեն հաստատված է <a href=".SITE."><br>վերադառնալ կայք</a>";}
+        }
+    }
+};
+
+function check_login_header(){
+    if (check_login()){
+        echo "loginmmm";
+    }else{
+        echo "login";
+    }
+};
+
+function check_login(){
+    $mail = trimstrip('mail');
+    $passwrd = trimstrip('passwrd');
+    if($mail){
+        if($passwrd){
+            $value = "SELECT passwrd, stat, alive FROM users WHERE mail='".$mail."'";
+            $user = mysqli_query(bazakpnel(), $value);
+            $user1 = mysqli_fetch_assoc($user);
+            if (password_verify($passwrd, $user1['passwrd'])){
+                if($user1['alive'] == 1){
+                    if($user1['stat'] == 1){
+                        setcookie("mail", $mail);
+                        return true;
+                    }else{
+                        echo "Օգտատիրոջ մուտքը հաստատված չէ";
+                        return false;}
+                }else{
+                    echo "Օգտատերը հեռացված է";
+                    return false;}
+            }else{
+                echo "Սխալ տվյալներ";
+                return false;}
         }
     }
 };
