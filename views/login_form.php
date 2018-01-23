@@ -13,7 +13,7 @@
 </head>
 <body>
 <div class="container">
-	<div id="fullscreen_bg" class="fullscreen_bg"/>
+	<div id="fullscreen_bg" class="fullscreen_bg"/>  nk,
 
    <form class="form-signin" action="login" method="POST">
 		<h3 class="form-signin-heading">Բարի գալուստ</h3>
