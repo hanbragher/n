@@ -21,4 +21,4 @@
 </body>
 </html>
 
-<?php check_login_header(); print_r($_SERVER);
+<?php echo check_login_header(); print_r($_SERVER);

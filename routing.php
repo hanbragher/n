@@ -39,6 +39,12 @@ $routing =  [
 		'model'     => ''
 	],
 
+    "/userview" => [
+        'method'    => 'POST',
+        'view'      => ROOT."/views/userview.php",
+        'model'     => ''
+    ],
+
 	"/" => [
 		'method'    => 'GET',
 		'view'      => ROOT."/views/start_page.php",

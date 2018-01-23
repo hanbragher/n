@@ -15,7 +15,7 @@
 <div class="container">
 	<div id="fullscreen_bg" class="fullscreen_bg"/>
 
-	<form class="form-signin" action="<?php check_login_header();?>" method="POST">
+	<form class="form-signin" <?php check_login_header();?>
 		<h3 class="form-signin-heading">Բարի գալուստ</h3>
         <h class="form-signin-heading"><?php check_login(); ?></h>
 		<input type="text" class="form-control" placeholder="էլ․ հասցե" required="" autofocus="" name="mail">

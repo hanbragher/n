@@ -78,9 +78,9 @@ function user_activation(){
 
 function check_login_header(){
     if (check_login()){
-        echo "loginmmm";
+        return "action=\"login\" method=\"POST\">";
     }else{
-        echo "login";
+        return "action=\"login\" method=\"POST\">";
     }
 };
 
@@ -105,7 +105,8 @@ function check_login(){
                     return false;}
             }else{
                 echo "Սխալ տվյալներ";
-                return false;}
+                return "login";}
+                //return false;}
         }
     }
 };
