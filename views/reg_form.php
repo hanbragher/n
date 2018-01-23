@@ -17,7 +17,12 @@
 
     <form class="form-signin" action="reg" method="POST">
         <h3 class="form-signin-heading">Գրանցվել</h3>
-        <h6 class="form-signin-heading"><?php stugelpass();?></h6>
+        <?php if($data){?>
+            <div class="alert alert-<?php echo ($data["success"]) ? "success" : "danger";?>" role="alert">
+                <?php echo ($data["message"]) ? $data["message"] : "";?>
+            </div>
+        <?php };?>
+
         <input type="email" class="form-control" placeholder="էլ․ հասցե" required autofocus="" name="regmail">
         <input class="form-control" type="password" placeholder="Գաղտնաբառ" name="regpswrd" required pattern="[0-9A-Za-z]{2,}">
         <input class="form-control" type="password" placeholder="Գաղտնաբառ" name="regpswrd1" required pattern="[0-9A-Za-z]{2,}">

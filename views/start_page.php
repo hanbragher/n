@@ -15,19 +15,19 @@
 <div class="container">
     <div id="fullscreen_bg" class="fullscreen_bg"/>
 
-    <form class="form-signin" action="login" method="GET">
-        <h3 class="form-signin-heading">Բարի գալուստ</h3>
-        <button class="btn btn-lg btn-primary btn-block" type="submit">
-            Մուտք
-        </button>
 
-    </form>
+    <h3 class="form-signin-heading">Բարի գալուստ</h3>
+    <a href="/login" class="btn btn-lg btn-primary btn-block" type="submit">
+        Մուտք
+    </a>
 
-    <form class="form-signin" action="reg" method="POST">
-        <button class="btn btn-lg btn-primary btn-block" type="submit">
-            Գրանցվել
-        </button>
-    </form>
+
+
+
+    <a href="/registration" class="btn btn-lg btn-primary btn-block" type="submit">
+        Գրանցվել
+    </a>
+
 
 </div>
 <!-- Optional JavaScript -->

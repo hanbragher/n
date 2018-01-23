@@ -15,7 +15,7 @@ class User
         return $this->$a;
     }
 
-    private function randnumber10($checks){
+    public function randnumber10($checks){
         $rnd;
         for ($a = 0; $a <= 9; $a++){
             $rnd .= rand(0, 9);
@@ -26,14 +26,13 @@ class User
     private function  regpashesh($regpswrd){
         $rpashesh = password_hash($regpswrd, PASSWORD_DEFAULT);
         $this->pass = $rpashesh;
-
     }
 
-    function __construct($uservalue, $regpswrd, $mailvalue)
+    /*function __construct($regpswrd, $mailvalue)
     {
-        $this->username = $uservalue;
+       // $this->username = $uservalue;
         $this->regpashesh($regpswrd);
         $this->mail = $mailvalue;
         $this->randnumber10("checks");
-    }
+    }*/
 }

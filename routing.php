@@ -18,12 +18,13 @@ $routing =  [
     "/reg" => [
 		'method'    => 'POST',
 		'view'      => ROOT."/views/reg_form.php",
-		'model'     => ''
+		'model'     => 'NewUser#grancelUser'
 	],
 
+
     "/registration" => [
-		'method'    => 'POST',
-		'view'      => ROOT."/actions/registration.php",
+		'method'    => 'GET',
+		'view'      => ROOT."/views/reg_form.php",
 		'model'     => ''
 	],
 
