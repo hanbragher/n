@@ -5,7 +5,7 @@ $pass = "";
 $bazaname = "userbaza";
 $tablename = "users";*/
 
-
+//
 //createbaza($host, $login, $pass, $bazaname);
 //creattbl($host, $login, $pass, $bazaname, $tablename);
 
