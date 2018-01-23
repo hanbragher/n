@@ -15,24 +15,19 @@
 <div class="container">
     <div id="fullscreen_bg" class="fullscreen_bg"/>
 
-    <form class="form-signin" action="reg" method="POST">
-        <h3 class="form-signin-heading">Գրանցվել</h3>
-        <?php if($data){?>
-            <div class="alert alert-<?php echo ($data["success"]) ? "success" : "danger";?>" role="alert">
-                <?php echo ($data["message"]) ? $data["message"] : "";?>
-            </div>
-        <?php };?>
 
-        <input type="email" class="form-control" placeholder="էլ․ հասցե" required autofocus="" name="regmail">
-        <input class="form-control" type="password" placeholder="Գաղտնաբառ" name="regpswrd" required pattern="[0-9A-Za-z]{2,}">
-        <input class="form-control" type="password" placeholder="Գաղտնաբառ" name="regpswrd1" required pattern="[0-9A-Za-z]{2,}">
-        <input type="checkbox" required>
-        <h6><a class="form-signin-heading" href='agree'>Համաձայն եմ պայմանների հետ</a></h6>
-        <button class="btn btn-lg btn-primary btn-block" type="submit">
-            Գրանցվել
-        </button>
-        <a href="<?php echo SITE;?>"<h class="form-signin-heading">Վերադարձ</h></a>
-    </form>
+    <h3 class="form-signin-heading">Բարի գալուստ</h3>
+    <a href="/login" class="btn btn-lg btn-primary btn-block" type="submit">
+        Մուտք
+    </a>
+
+
+
+
+    <a href="/registration" class="btn btn-lg btn-primary btn-block" type="submit">
+        Գրանցվել
+    </a>
+
 
 </div>
 <!-- Optional JavaScript -->

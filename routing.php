@@ -9,21 +9,22 @@ $routing =  [
     ],
 
     "/login" => [
-        'method'    => 'POST',
+        'method'    => 'GET',
         'view'      => ROOT."/views/userview.php",
         'model'     => ''
     ],
 
 
     "/reg" => [
-		'method'    => 'GET',
+		'method'    => 'POST',
 		'view'      => ROOT."/views/reg_form.php",
-		'model'     => ''
+		'model'     => 'NewUser#grancelUser'
 	],
 
+
     "/registration" => [
-		'method'    => 'POST',
-		'view'      => ROOT."/actions/registration.php",
+		'method'    => 'GET',
+		'view'      => ROOT."/views/reg_form.php",
 		'model'     => ''
 	],
 
@@ -35,13 +36,19 @@ $routing =  [
 
 	"/error" => [
 		'method'    => 'GET',
-		'view'      => ROOT."/views/error_page.html",
+		'view'      => ROOT."/views/error_page.php",
 		'model'     => ''
 	],
 
+    "/userview" => [
+        'method'    => 'POST',
+        'view'      => ROOT."/views/userview.php",
+        'model'     => ''
+    ],
+
 	"/" => [
 		'method'    => 'GET',
-		'view'      => ROOT."/views/login_form.php",
+		'view'      => ROOT."/views/start_page.php",
 		'model'     => ''
 	],
 ];

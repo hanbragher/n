@@ -15,16 +15,10 @@
 <div class="container">
 	<div id="fullscreen_bg" class="fullscreen_bg"/>
 
-   <form class="form-signin" action="login" method="POST">
+	<form class="form-signin" action="login" method="POST">
 		<h3 class="form-signin-heading">Բարի գալուստ</h3>
-        <h class="form-signin-heading"><?php check_login(); ?></h>
-		<input type="text" class="form-control" placeholder="էլ․ հասցե" required="" autofocus="" name="mail">
-		<input type="password" class="form-control" placeholder="Գաղտնաբառ" required="" name="passwrd">
-		<button class="btn btn-lg btn-primary btn-block" type="submit">
-			Մուտք
-		</button>
-        <a href="<?php echo SITE;?>"><h class="form-signin-heading">Վերադարձ / </h></a>
-		<a href="remember"><h class="form-signin-heading">Բա գաղնաբա՞ռը</h></a>
+<?php include ('../functions.php'); user_activation();?>
+        <a href="<?php echo SITE;?>"><h class="form-signin-heading">Դեպի գլխավոր էջ -></h></a>
 	</form>
 
 </div>
