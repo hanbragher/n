@@ -44,8 +44,34 @@ function newuser(){
     $user->grancelUser();
 };
 
-function mailuxarkel($reglogin, $regmail, $key){
+function mailuxarkel($regmail, $key){
     $vernagir = 'Բարի գալուստ';
-    $text = "Էջը հաստատելու համար խնդրում են անցնել այս հղումով ".SITE."/actions/accountactivating.php/?user=$reglogin&key=$key";
+    $text = "Էջը հաստատելու համար խնդրում են անցնել այս հղումով ".SITE."actions/account_activation.php/?mail=$regmail&key=$key";
     mail($regmail, $vernagir, $text, 'From: boom@bdish.com');
+};
+
+function user_activation(){
+    $mail = $_GET["mail"];
+    $key = $_GET["key"];
+    if($mail){
+        if($key){
+            $value = "SELECT checks, stat FROM users WHERE mail='".$mail."'";
+            $user = mysqli_query(bazakpnel(), $value);
+            $user = mysqli_fetch_assoc($user);
+            if ($user['stat'] != 1 && $user['stat'] == 0){
+                if($user['checks'] == $key){
+                    $value1 = "UPDATE users SET stat=1 WHERE mail='".$mail."'";
+                    if (mysqli_query(bazakpnel(), $value1)){
+                        echo "<a><h class=\"form-signin-heading\">Հաջողությամբ հաստատված է</h></a>";
+                    }else{
+                        echo "<a><h class=\"form-signin-heading\">Ակտիվացման սխալ". mysqli_error(bazakpnel())."</h></a>";}
+                        //echo "Ակտիվացման սխալ ". mysqli_error(bazakpnel())."<br>";}
+                }else{
+                    echo "<a><h class=\"form-signin-heading\">Սպառված կամ սխալ ակտիվացում</h></a>";}
+                    //echo "Սպառված կամ սխալ ակտիվացում <a href=".SITE."><br>վերադառնալ կայք</a>";}
+            }elseif($user['stat'] == 1){
+                    echo "<a><h class=\"form-signin-heading\">Արդեն հաստատված է </h></a>";}
+                    //echo "Արդեն հաստատված է <a href=".SITE."><br>վերադառնալ կայք</a>";}
+        }
+    }
 };

@@ -20,7 +20,7 @@ function createbaza($host, $login, $pass, $bazaname){
         return false;
     }
 };
-hh
+
 function creattbl($host, $login, $pass, $bazaname, $tablename){
     $bazaserver = mysqli_connect($host, $login, $pass);
     $sql = "CREATE TABLE `$bazaname`.`$tablename` ( 
