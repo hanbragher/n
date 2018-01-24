@@ -16,7 +16,10 @@
         <h2 style="text-align: center;">
             Վայ, ձեր որոնվող էջը <b>գոյություն չունի</b></h2>
     </div>
-    <a href="<?php echo SITE;?>"<h class="form-signin-heading">Վերադարձ</h></a>
+    <a href="<?php echo SITE;?>"><h class="form-signin-heading">Վերադարձ</h></a>
 </div>
 </body>
 </html>
+
+<?php
+print_r($_SERVER);

@@ -45,7 +45,9 @@ class NewUser extends User
     	$this->regpashesh();
     	$value = "INSERT INTO users (passwrd, mail, checks) VALUES ('".$this->get('pass')."','".$this->get('mail')."','".$this->get('checks')."')";
         if (mysqli_query($this->DB, $value)) {
-        	    Mail::send($this->get('mail'), "aktivacum", $this->get('checks'));
+                $adress = SITE."/activation/?mail=".$this->get('mail')."&key=".$this->get('checks');
+                $message = "Հարգելի օգտատեր, հաշիվը ակտիվացնելու համար անցեք ".$adress;
+        	    Mail::send($this->get('mail'), "Ակտիվացում", $message);
                 mkdir(ROOT . "/userfolders/".$this->get("mail"), 0644);
                 $this->responce = [
                 	"success" => true,

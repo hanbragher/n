@@ -11,9 +11,14 @@ $routing =  [
     "/login" => [
         'method'    => 'GET',
         'view'      => ROOT."/views/userview.php",
-        'model'     => ''
+        'model'     => 'CheckUser#check'
     ],
 
+    "/trylogin" => [
+        'method'    => 'POST',
+        'view'      => ROOT."/views/userview.php",
+        'model'     => 'CheckUser#check'
+    ],
 
     "/reg" => [
 		'method'    => 'POST',
@@ -27,6 +32,12 @@ $routing =  [
 		'view'      => ROOT."/views/reg_form.php",
 		'model'     => ''
 	],
+
+    "/activation" => [
+            'method'    => 'GET',
+            'view'      => ROOT."/actions/account_activation.php",
+            'model'     => ''
+    ],
 
     "/agree" => [
 		'method'    => 'GET',

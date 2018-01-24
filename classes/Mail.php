@@ -8,7 +8,7 @@
 
 class Mail {
 
-	public static function send($to, $subject,$message,$headers=null){
+	public static function send($to, $subject, $message, $headers=null){
 		mail($to, $subject, $message, $headers);
 	}
 }

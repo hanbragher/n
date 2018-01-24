@@ -15,9 +15,9 @@
 <div class="container">
 	<div id="fullscreen_bg" class="fullscreen_bg"/>
 
-   <form class="form-signin" action="login" method="POST">
+   <form class="form-signin" action="trylogin" method="POST">
 		<h3 class="form-signin-heading">Բարի գալուստ</h3>
-        <h class="form-signin-heading"><?php check_login(); ?></h>
+        <h class="form-signin-heading"><?php print_r($check);//echo ($check["message"]) ? $check["message"] : ""?></h>
 		<input type="text" class="form-control" placeholder="էլ․ հասցե" required="" autofocus="" name="mail">
 		<input type="password" class="form-control" placeholder="Գաղտնաբառ" required="" name="passwrd">
 		<button class="btn btn-lg btn-primary btn-block" type="submit">

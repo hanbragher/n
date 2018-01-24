@@ -1,5 +1,6 @@
 <?php
 define ('ROOT', __DIR__);
+define ('SITE', "http://n");
 
 spl_autoload_register(function ($class) {
 	include (ROOT."/classes/". $class .".php");
