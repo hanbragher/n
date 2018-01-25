@@ -8,56 +8,57 @@ $routing =  [
         'model'     => ''
     ],
 
-    "/login" => [
+    "login" => [
         'method'    => 'GET',
         'view'      => ROOT."/views/userview.php",
         'model'     => 'CheckUser#check'
     ],
 
-    "/trylogin" => [
+    "trylogin" => [
         'method'    => 'POST',
         'view'      => ROOT."/views/userview.php",
         'model'     => 'CheckUser#check'
     ],
 
-    "/reg" => [
+    "reg" => [
 		'method'    => 'POST',
 		'view'      => ROOT."/views/reg_form.php",
 		'model'     => 'NewUser#grancelUser'
 	],
 
 
-    "/registration" => [
+    "registration" => [
 		'method'    => 'GET',
 		'view'      => ROOT."/views/reg_form.php",
 		'model'     => ''
 	],
 
-    "/activation" => [
+    "activation" => [
             'method'    => 'GET',
             'view'      => ROOT."/actions/account_activation.php",
-            'model'     => ''
+            'model'     => 'NewUser#activation',
+	        'params'    => ["mail", "key"]
     ],
 
-    "/agree" => [
+    "agree" => [
 		'method'    => 'GET',
 		'view'      => ROOT."/views/hamadzayanagir.html",
 		'model'     => ''
 	],
 
-	"/error" => [
+	"error" => [
 		'method'    => 'GET',
 		'view'      => ROOT."/views/error_page.php",
 		'model'     => ''
 	],
 
-    "/userview" => [
+    "userview" => [
         'method'    => 'POST',
         'view'      => ROOT."/views/userview.php",
         'model'     => ''
     ],
 
-	"/" => [
+	null => [
 		'method'    => 'GET',
 		'view'      => ROOT."/views/start_page.php",
 		'model'     => ''

@@ -76,4 +76,10 @@ class NewUser extends User
 
         return $this->responce;
     }
+
+    public function activation($params){
+	    print_r($params);
+
+    }
+
 }
