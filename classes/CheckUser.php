@@ -9,7 +9,7 @@ class CheckUser extends User
     function __construct()
     {
 
-        //$this->set("DB", mysqli_connect('localhost', "root", '', 'userbaza'));
+        $this->DB =  mysqli_connect('localhost', "root", '', 'userbaza');
         $this->set("mail", $_POST["mail"]);
         $this->set("pass", $_POST["passwrd"]);
 
@@ -20,8 +20,7 @@ class CheckUser extends User
     {
         if ($this->get("mail")) {
             if ($this->get("pass")) {
-                //$baza = $this->get("DB");
-                $baza = mysqli_connect('localhost', "root", '', 'userbaza');
+                $baza = $this->DB;
                 $value = "SELECT passwrd, stat, alive  FROM users WHERE mail='" . $this->get("mail") . "'";
                 $user = mysqli_query($baza, $value);
                 $user = mysqli_fetch_assoc($user);

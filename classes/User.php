@@ -23,10 +23,10 @@ class User
         $this->checks = $rnd;
     }
 
-    private function  regpashesh($regpswrd){
+    /*private function  regpashesh($regpswrd){
         $rpashesh = password_hash($regpswrd, PASSWORD_DEFAULT);
         $this->pass = $rpashesh;
-    }
+    }*/
 
     /*function __construct($regpswrd, $mailvalue)
     {
