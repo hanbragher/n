@@ -2,7 +2,7 @@
 $routing =  [
 	//baza stexcel
 
-    "/baza" => [
+    "baza" => [
         'method'    => 'GET',
         'view'      => ROOT."/actions/one_time_mysql_action.php",
         'model'     => ''
@@ -11,19 +11,19 @@ $routing =  [
     "login" => [
         'method'    => 'GET',
         'view'      => ROOT."/views/userview.php",
-        'model'     => 'CheckUser#check'
+        'model'     => ''
     ],
 
     "trylogin" => [
         'method'    => 'POST',
         'view'      => ROOT."/views/userview.php",
-        'model'     => 'CheckUser#check'
+        'model'     => 'User#check'
     ],
 
     "reg" => [
 		'method'    => 'POST',
 		'view'      => ROOT."/views/reg_form.php",
-		'model'     => 'NewUser#grancelUser'
+		'model'     => 'User#grancelUser'
 	],
 
 
@@ -36,7 +36,7 @@ $routing =  [
     "activation" => [
             'method'    => 'GET',
             'view'      => ROOT."/actions/account_activation.php",
-            'model'     => 'NewUser#activation',
+            'model'     => 'User#activation',
 	        'params'    => ["mail", "key"]
     ],
 
