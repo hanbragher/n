@@ -34,7 +34,9 @@ class NewUser extends User
 
 	private function checkUser(){
 	    $value = "SELECT mail FROM users WHERE mail='".$this->get("mail")."'";
-        if (mysqli_query($this->DB, $value)){
+        $user = mysqli_query($this->DB, $value);
+        $user = mysqli_fetch_assoc($user);
+        if($user["mail"]){
             $this->responce = [
                 "success" => false,
                 "message" => "Տվյալ էլ.հասցեն արդեն գրանցված է"];
