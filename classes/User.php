@@ -15,7 +15,7 @@ class User
         return $this->$a;
     }
 
-    public function randnumber10($checks){
+    public function randnumber10(){
         $rnd;
         for ($a = 0; $a <= 9; $a++){
             $rnd .= rand(0, 9);

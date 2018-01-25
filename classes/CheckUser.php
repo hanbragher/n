@@ -10,8 +10,8 @@ class CheckUser extends User
     {
 
         //$this->set("DB", mysqli_connect('localhost', "root", '', 'userbaza'));
-        $this->set("mail", $_POST["regmail"]);
-        $this->set("pass", $_POST["regpswrd"]);
+        $this->set("mail", $_POST["mail"]);
+        $this->set("pass", $_POST["passwrd"]);
 
 
     }
@@ -20,28 +20,30 @@ class CheckUser extends User
     {
         if ($this->get("mail")) {
             if ($this->get("pass")) {
+                //$baza = $this->get("DB");
+                $baza = mysqli_connect('localhost', "root", '', 'userbaza');
                 $value = "SELECT passwrd, stat, alive  FROM users WHERE mail='" . $this->get("mail") . "'";
-                $user = mysqli_query($this->get("DB"), $value);
+                $user = mysqli_query($baza, $value);
                 $user = mysqli_fetch_assoc($user);
-                if (password_verify($this->get("pass"),$user['passwrd'])){
+                if (password_verify($this->get("pass"), $user['passwrd'])){
                     if($user['alive'] == 1){
                         if($user['stat']==1){
-                            $this->set('responce',
+                            $this->responce =
                                 ["success" => true,
-                                 "message" => ""]);
+                                 "message" => ""];
                         }else{
-                            $this->set('responce',
+                            $this->responce =
                                 ["success" => false,
-                                "message" => "Օգտատիրոջ մուտքը հաստատված չէ"]);}
+                                "message" => "Օգտատիրոջ մուտքը հաստատված չէ"];}
                     }else{
-                        $this->set('responce',
+                        $this->responce =
                             ["success" => false,
-                            "message" => "Օգտատերը հեռացված է"]);}
+                            "message" => "Օգտատերը հեռացված է"];}
                 }else{
-                    $this->set('responce',
+                    $this->responce =
                         ["success" => false,
-                        "message" => "Սխալ տվյալներ"]);}
-
+                        "message" => "Սխալ տվյալներ"];
+                }
             }
         }
        return $this->responce;

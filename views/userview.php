@@ -1,7 +1,7 @@
 <?php
 //$checkUser = new CheckUser();
 //$check = $checkUser->check();
-if ($check["success"]){
+if ($data["success"]){
     include ("views/user_page.php");
 }else{
     include ("views/login_form.php");};
