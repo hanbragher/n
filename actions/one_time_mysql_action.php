@@ -6,8 +6,8 @@ $bazaname = "userbaza";
 $tablename = "users";
 
 //
-createbaza($host, $login, $pass, $bazaname);
-creattbl($host, $login, $pass, $bazaname, $tablename);
+//createbaza($host, $login, $pass, $bazaname);
+//creattbl($host, $login, $pass, $bazaname, $tablename);
 
 function createbaza($host, $login, $pass, $bazaname){
     $bazaserver = mysqli_connect($host, $login, $pass);
