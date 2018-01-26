@@ -98,7 +98,7 @@ class User extends AbstractUser
     	$this->regpashesh();
     	$value = "INSERT INTO users (passwrd, mail, checks) VALUES ('".$this->get('pass')."','".$this->get('mail')."','".$this->get('checks')."')";
         if (mysqli_query($this->DB, $value)) {
-                $adress = SITE."/activation/?mail=".$this->get('mail')."&key=".$this->get('checks');
+                $adress = SITE."/activation/".$this->get('mail')."/".$this->get('checks');
                 $message = "Հարգելի օգտատեր, հաշիվը ակտիվացնելու համար անցեք ".$adress;
         	    Mail::send($this->get("mail"), "Ակտիվացում", $message);
                 mkdir(ROOT . "/userfolders/".$this->get("mail"), 0644);
@@ -117,8 +117,35 @@ class User extends AbstractUser
     }
 
     public function activation($params){
-	    print_r($params);
-
+	    $baza = $this->DB;
+	    $value = "SELECT checks, stat, alive FROM users WHERE mail='".$params['mail']."'";
+        $user = mysqli_query($baza, $value);
+        $user = mysqli_fetch_assoc($user);
+        if ($user['checks'] == $params['key']){
+           if (!$user['alive'] == 0 && $user['alive'] == 1){
+               if (!$user['stat'] == 1 && $user['stat'] == 0){
+                   $value = "UPDATE users SET stat=1 WHERE mail='".$params['mail']."'";
+                   if (mysqli_query($baza, $value)){
+                       $this->responce = [
+                           "success" => true,
+                           "message" => "Բարեհաջող ակտիվացում"];
+                   }else{
+                       $this->responce = [
+                       "success" => false,
+                       "message" => mysqli_error($this->DB)];}
+               }else{
+                   $this->responce = [
+                   "success" => false,
+                   "message" => "Արդեն ակտիվ է"];}
+           }else{
+               $this->responce = [
+                   "success" => false,
+                   "message" => "Օգտատերը հեռացված է"];}
+        }else{
+            $this->responce = [
+                "success" => false,
+                "message" => "Սխալ տվյալներ"];}
+    return $this->responce;
     }
 
 }
