@@ -15,7 +15,7 @@
 <div align="center" class="container">
     <div id="fullscreen_bg" class="fullscreen_bg"/>
 
-        <h3 class="form-signin-heading">Ակտիվացում</h3>
+        <h3 class="form-signin-heading">Ակտիվացում</h3><br>
     <h class="form-signin-heading"><?php echo ($data["message"]) ? $data["message"] : "";?></h><br>
         <a href="<?php echo SITE;?>"><h class="form-signin-heading">Վերադարձ</h></a>
 
