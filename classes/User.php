@@ -44,39 +44,50 @@ class User extends AbstractUser
     }
 
 	public function check()
-	{
-		$this->set("mail", $_POST["mail"]);
-		$this->set("pass", $_POST["passwrd"]);
+    {
+        $this->set("mail", $_POST["mail"]);
+        $this->set("pass", $_POST["passwrd"]);
 
-		if ($this->get("mail")) {
-			if ($this->get("pass")) {
-				$baza = $this->DB;
-				$value = "SELECT passwrd, stat, alive  FROM users WHERE mail='" . $this->get("mail") . "'";
-				$user = mysqli_query($baza, $value);
-				$user = mysqli_fetch_assoc($user);
-				if (password_verify($this->get("pass"), $user['passwrd'])){
-					if($user['alive'] == 1){
-						if($user['stat']==1){
-							$this->responce =
-								["success" => true,
-								 "message" => ""];
-						}else{
-							$this->responce =
-								["success" => false,
-								 "message" => "Օգտատիրոջ մուտքը հաստատված չէ"];}
-					}else{
-						$this->responce =
-							["success" => false,
-							 "message" => "Օգտատերը հեռացված է"];}
-				}else{
-					$this->responce =
-						["success" => false,
-						 "message" => "Սխալ տվյալներ"];
-				}
-			}
-		}
-		return $this->responce;
-	}
+        if (!$this->get("mail")) {
+            return $this->responce =
+                ["success" => false,
+                    "message" => ""];
+        }
+
+        if (!$this->get("pass")) {
+            return $this->responce =
+                ["success" => false,
+                    "message" => ""];
+        }
+
+        $baza = $this->DB;
+        $value = "SELECT passwrd, stat, alive  FROM users WHERE mail='" . $this->get("mail") . "'";
+        $user = mysqli_query($baza, $value);
+        $user = mysqli_fetch_assoc($user);
+
+        if (!password_verify($this->get("pass"), $user['passwrd'])) {
+            return $this->responce =
+                ["success" => false,
+                    "message" => "Սխալ տվյալներ"];
+        }
+
+        if ($user['alive'] != 1) {
+            return $this->responce =
+                ["success" => false,
+                    "message" => "Օգտատերը հեռացված է"];
+        }
+
+        if ($user['stat'] != 1) {
+            return $this->responce =
+                ["success" => false,
+                    "message" => "Օգտատիրոջ մուտքը հաստատված չէ"];
+        }
+
+        return $this->responce =
+            ["success" => true,
+                "message" => ""];
+    }
+
 
 	public function grancelUser()
     {
