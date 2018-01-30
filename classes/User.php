@@ -40,6 +40,7 @@ class User extends AbstractUser
 
         //$user = mysqli_query($this->DB, $value);
         //$user = mysqli_fetch_assoc($user);
+
         if($user["mail"]){
             return $this->responce = [
                 "success" => false,
@@ -67,9 +68,12 @@ class User extends AbstractUser
 
         //$baza = $this->DB;
         $value = "SELECT passwrd, stat, alive  FROM users WHERE mail=". $this->get("mail");
+
         $user = $this->DB->query($value);
+
+        $user = $user->fetch(PDO::FETCH_ASSOC);
         //$user = mysqli_query($baza, $value);
-        $user = mysqli_fetch_assoc($user);
+        //$user = mysqli_fetch_assoc($user);
 
         if (!password_verify($this->get("pass"), $user['passwrd'])) {
             return $this->responce =
