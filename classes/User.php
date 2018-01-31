@@ -8,19 +8,21 @@ class User extends AbstractUser
 	private $DB;
 	private $responce;
 
-	function __construct() {
-		$this->DB = new PDO('mysql:host=localhost;dbname=userbaza','root', '');
+    function __construct() {
+		$this->DB = new PDO('mysql:host=localhost;dbname=userbaza','root', '',
+            [PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION,
+             PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC]);
         //$this->DB = mysqli_connect('localhost', "root", '', 'userbaza');
 
 	}
 
 
-	private function  regpashesh(){
+    private function  regpashesh(){
 		$this->set("pass", password_hash($this->get("pass"), PASSWORD_DEFAULT));
 	}
 
-
-	private function checkPass(){
+//--------stugel passeri hamapatasxanutyuny-------------
+    private function checkPass(){
 		if($this->get("pass")) {
             if ($this->pass1 == $this->get("pass")){
                 return true;
@@ -31,22 +33,61 @@ class User extends AbstractUser
         return false;
 	}}
 
+//--------stugel tenc mail ogtater ka teche-------------
 	private function checkUser(){
-	    $value = "SELECT mail FROM users WHERE mail=".$this->get('mail');
+	    $value = "SELECT mail FROM users WHERE mail = :mail";
+	    $user = $this->DB->prepare($value);
+	    $user->bindParam(':mail', $this->get('mail'), PDO::PARAM_STR);
+	    $user->execute();
+	    $usero = $user->fetch();
 
-	    $user = $this->DB->query($value);
-
-	    $user = $user->fetch(PDO::FETCH_ASSOC);
-
-        //$user = mysqli_query($this->DB, $value);
-        //$user = mysqli_fetch_assoc($user);
-
-        if($user["mail"]){
-            return $this->responce = [
+        if($usero['mail']){
+            $this->responce = [
                 "success" => false,
                 "message" => "Տվյալ էլ.հասցեն արդեն գրանցված է"];
+            return false;
         }
         return true;
+    }
+
+//--------katarel stugumner ev grancel ogtater
+    public function grancelUser()
+    {
+        $this->set("mail", $_POST["regmail"]);
+        $this->set("pass", $_POST["regpswrd"]);
+        $this->pass1 = $_POST["regpswrd1"];
+
+        if (!$this->checkPass()){
+            return $this->responce;
+        }
+
+        if (!$this->checkUser()){
+            return $this->responce;
+        }
+
+        $this->randnumber10();
+        $this->regpashesh();
+        $this->set("pass", $this->DB->quote($this->get("pass")));
+        $insert = "INSERT INTO users (passwrd, mail, checks) VALUES (:pass, :mail, :checks)";
+        $value = $this->DB->prepare($insert);
+        $value->bindParam(':pass', $this->get('pass'), PDO::PARAM_STR);
+        $value->bindParam(':mail', $this->get('mail'), PDO::PARAM_STR);
+        $value->bindParam(':checks', $this->get('checks'), PDO::PARAM_INT);
+
+        if ($value->execute()){
+            $adress = SITE."/activation/".$this->get('mail')."/".$this->get('checks');
+            $message = "Հարգելի օգտատեր, հաշիվը ակտիվացնելու համար անցեք ".$adress;
+            Mail::send($this->get("mail"), "Ակտիվացում", $message);
+            mkdir(ROOT . "/userfolders/".$this->get("mail"), 0644);
+            return $this->responce = [
+                "success" => true,
+                "message" => "Բարեհաջող գրանցում, <br>Նշված էլ.հասցեին ուղարկվել է նամակ, հաստատելու համար անցեք հղումով"
+            ];
+        }else{
+            print_r($this->DB->errorInfo());
+        }
+
+        return $this->responce;
     }
 
 	public function check()
@@ -66,7 +107,6 @@ class User extends AbstractUser
                     "message" => ""];
         }
 
-        //$baza = $this->DB;
         $value = "SELECT passwrd, stat, alive  FROM users WHERE mail=". $this->get("mail");
 
         $user = $this->DB->query($value);
@@ -98,108 +138,37 @@ class User extends AbstractUser
                 "message" => ""];
     }
 
-
-	public function grancelUser()
-    {
-
-	    /*$this->set("mail", $_POST["regmail"]);
-	    $this->set("pass", ($_POST["regpswrd"]));
-	    $this->pass1 = ($_POST["regpswrd1"]);*/
-
-	    $this->set("mail", $this->DB->quote($_POST["regmail"]));
-	    $this->set("pass", $this->DB->quote($_POST["regpswrd"]));
-	    $this->pass1 = $this->DB->quote($_POST["regpswrd1"]);
-
-
-
-        $this->randnumber10();
-
-        if (!$this->checkPass()){
-            return $this->responce;
-        }
-
-        if (!$this->checkUser()){
-            return $this->responce;
-        }
-        echo 34234234;
-echo $this->get("mail");
-echo $this->get("pass");
-echo  $this->get('checks');
-        echo SITE;
-
-        $this->regpashesh();
-
-        $this->set("pass", $this->DB->quote($this->get("pass")));
-
-        $value = "INSERT INTO users (passwrd, mail, checks) VALUES (".$this->get('pass').",". $this->get('mail') .",". $this->get('checks').")";
-echo $value;
-        if ($this->DB->query($value)){
-            $adress = SITE."/activation/".$this->get('mail')."/".$this->get('checks');
-            $message = "Հարգելի օգտատեր, հաշիվը ակտիվացնելու համար անցեք ".$adress;
-            Mail::send($this->get("mail"), "Ակտիվացում", $message);
-            mkdir(ROOT . "/userfolders/".$this->get("mail"), 0644);
-            return $this->responce = [
-                "success" => true,
-                "message" => "Բարեհաջող գրանցում, <br>Նշված էլ.հասցեին ուղարկվել է նամակ, հաստատելու համար անցեք հղումով"
-            ];
-        }else{ print_r($this->DB->errorInfo());
-           // return $this->responce = [
-               // "success" => false,
-               // "message" => mysqli_error($this->DB)
-            //];
-        }
-
-
-
-       /* if (mysqli_query($this->DB, $value)) {
-                $adress = SITE."/activation/".$this->get('mail')."/".$this->get('checks');
-                $message = "Հարգելի օգտատեր, հաշիվը ակտիվացնելու համար անցեք ".$adress;
-        	    Mail::send($this->get("mail"), "Ակտիվացում", $message);
-                mkdir(ROOT . "/userfolders/".$this->get("mail"), 0644);
-                $this->responce = [
-                	"success" => true,
-	                "message" => "Բարեհաջող գրանցում, <br>Նշված էլ.հասցեին ուղարկվել է նամակ, հաստատելու համար անցեք հղումով"
-                ];
-        }else{
-	        $this->responce = [
-		        "success" => false,
-		        "message" => mysqli_error($this->DB)
-	        ];
-        }*/
-
-        return $this->responce;
-    }
-
+//-----grancveluc heto aktivacnel
     public function activation($params){
-	    //$baza = $this->DB;
-	    $value = "SELECT checks, stat, alive FROM users WHERE mail=".$params['mail'];
-        $user = $this->DB->query($value);
-	    $user = $user->fetch(PDO::FETCH_ASSOC);
+	    $value = "SELECT checks, stat, alive FROM users WHERE mail= :mail";
+	    $user = $this->DB->prepare($value);
+	    $user->bindParam(":mail", $params['mail'], PDO::PARAM_STR);
+        $user->execute();
+	    $usero = $user->fetch();
 
-	    //$user = mysqli_query($baza, $value);
-        //$user = mysqli_fetch_assoc($user);
-echo $user['checks'];
-        if ($user['checks'] != $params['key']){
+        if ($usero['checks'] != $params['key']){
             return $this->responce = [
                 "success" => false,
                 "message" => "Սխալ տվյալներ"];
         }
 
-        if ($user['alive'] == 0 && $user['alive'] != 1){
+        if ($usero['alive'] == 0 && $usero['alive'] != 1){
             return $this->responce = [
                 "success" => false,
                 "message" => "Օգտատերը հեռացված է"];
         }
 
-        if ($user['stat'] == 1 && $user['stat'] != 0){
+        if ($usero['stat'] == 1 && $usero['stat'] != 0){
             return $this->responce = [
                 "success" => false,
                 "message" => "Արդեն ակտիվ է"];
         }
 
-        $value = "UPDATE users SET stat=1 WHERE mail=".$params['mail'];
+        $value = "UPDATE users SET stat=1 WHERE mail= :mail";
+        $update = $this->DB->prepare($value);
+        $update->bindParam(":mail", $params['mail'], PDO::PARAM_STR);
 
-        if ($this->DB->query($value)){
+        if ($update->execute()){
             return $this->responce = [
                 "success" => true,
                 "message" => "Բարեհաջող ակտիվացում"];
@@ -207,18 +176,6 @@ echo $user['checks'];
 
         return $this->responce = [
             "success" => false,
-            "message" => mysqli_error($this->DB)];
+            "message" => $this->DB->errorInfo()];
         }
-
-
-        /*if (mysqli_query($baza, $value)){
-            return $this->responce = [
-                "success" => true,
-                "message" => "Բարեհաջող ակտիվացում"];
-        }
-
-        return $this->responce = [
-                "success" => false,
-                "message" => mysqli_error($this->DB)];*/
-
 }

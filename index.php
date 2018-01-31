@@ -34,7 +34,3 @@ if($routing[$adress]){
 		    header ('Location: /error');};
 }else{
     header ('Location: /error');}
-
-
-//include ('views/login_form.php');
-//print_r($_SERVER);
