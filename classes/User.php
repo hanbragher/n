@@ -67,7 +67,7 @@ class User extends AbstractUser
 
         $this->randnumber10();
         $this->regpashesh();
-        $this->set("pass", $this->DB->quote($this->get("pass")));
+        //$this->set("pass", $this->DB->quote($this->get("pass")));
         $insert = "INSERT INTO users (passwrd, mail, checks) VALUES (:pass, :mail, :checks)";
         $value = $this->DB->prepare($insert);
         $value->bindParam(':pass', $this->get('pass'), PDO::PARAM_STR);
@@ -92,42 +92,39 @@ class User extends AbstractUser
 
 	public function check()
     {
-        $this->set("mail", $_POST["mail"]);
-        $this->set("pass", $_POST["passwrd"]);
-
-        if (!$this->get("mail")) {
+        if (!$_POST["mail"]) {
             return $this->responce =
                 ["success" => false,
                     "message" => ""];
         }
 
-        if (!$this->get("pass")) {
+        if (!$_POST["passwrd"]) {
             return $this->responce =
                 ["success" => false,
                     "message" => ""];
         }
 
-        $value = "SELECT passwrd, stat, alive  FROM users WHERE mail=". $this->get("mail");
+        $value = "SELECT passwrd, stat, alive  FROM users WHERE mail= :mail";
+        $user = $this->DB->prepare($value);
+        $user->bindParam(":mail", $_POST["mail"], PDO::PARAM_STR);
+        $user->execute();
+        $usero = $user->fetch();
 
-        $user = $this->DB->query($value);
 
-        $user = $user->fetch(PDO::FETCH_ASSOC);
-        //$user = mysqli_query($baza, $value);
-        //$user = mysqli_fetch_assoc($user);
-
-        if (!password_verify($this->get("pass"), $user['passwrd'])) {
+        if (!password_verify($_POST["passwrd"], $usero['passwrd'])) {
+            echo $_POST["passwrd"], $usero['passwrd'];
             return $this->responce =
                 ["success" => false,
                     "message" => "Սխալ տվյալներ"];
         }
 
-        if ($user['alive'] != 1) {
+        if ($usero['alive'] != 1) {
             return $this->responce =
                 ["success" => false,
                     "message" => "Օգտատերը հեռացված է"];
         }
 
-        if ($user['stat'] != 1) {
+        if ($usero['stat'] != 1) {
             return $this->responce =
                 ["success" => false,
                     "message" => "Օգտատիրոջ մուտքը հաստատված չէ"];
