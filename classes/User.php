@@ -90,6 +90,8 @@ class User extends AbstractUser
         return $this->responce;
     }
 
+
+//------kayqum mutq gorceluc stugel tvyalnery
 	public function check()
     {
         if (!$_POST["mail"]) {
